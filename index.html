@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    #container {
+      text-align: center;
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 700px;
+      width: 100%;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 10px;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+    .result-container{
+        position: relative;
+    }
+    .result-container #result{
+        position: absolute;
+        right: 10px;
+        top: 140px;
+        z-index: 99;
+        max-width: 230px;
+        width: 100%;
+        background-color: #08245A;
+    }
+    .result-container img{
+        max-width: 680px;
+        width: 100%;
+    }
+
+    #result{
+        background-color: black;
+    }
+
+
+
+
+    .result-download-link {
+  display: inline-block;
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-top: 10px; /* Add some spacing from the image */
+  transition: background-color 0.3s;
+}
+
+.result-download-link:hover {
+  background-color: #45a049;
+}
+
+    
+  </style>
+  <script>
+    function generateImage() {
+      var company = document.getElementById('company').value;
+      var boothNumber = document.getElementById('boothNumber').value;
+
+      var canvas = document.createElement('canvas');
+      canvas.width = 300;
+      canvas.height = 100;
+      var context = canvas.getContext('2d');
+
+      context.font = '20px Arial';
+      context.fillStyle = '#fff';
+      context.fillText('Company: ' + company, 10, 30);
+      context.fillText('Booth: ' + boothNumber, 10, 60);
+
+      var dataURL = canvas.toDataURL();
+
+      var resultContainer = document.getElementById('result');
+      resultContainer.innerHTML = '<img src="' + dataURL + '" alt="Result Image">';
+
+      var downloadLink = document.createElement('a');
+      downloadLink.href = dataURL;
+      downloadLink.download = 'company_booth_image.png';
+      downloadLink.innerHTML = 'Download Image';
+
+      downloadLink.classList.add('result-download-link'); // Added class here
+
+      resultContainer.appendChild(downloadLink);
+    }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <h2 style="color: #4caf50;">Event Badge Generator</h2>
+    <label for="company">Company:</label>
+    <input type="text" id="company" placeholder="Enter company name">
+
+    <label for="boothNumber">Booth Number:</label>
+    <input type="text" id="boothNumber" placeholder="Enter booth number">
+
+    <button onclick="generateImage()">Generate & Download</button>
+
+    
+   <!-- <div class="result-container">
+      <img src="./image/client-graphic.png" alt="client-graphic"> -->
+        <div id="result"></div>
+   <!-- </div> -->
+    
+   
+  </div>
+
+  
+</body>
+</html>
